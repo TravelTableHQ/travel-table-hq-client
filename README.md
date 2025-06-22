@@ -28,6 +28,59 @@ travel-table-hq-client/
 └── package.json
 ```
 
+## 🎨 UI 라이브러리 (`packages/ui`)
+
+이 프로젝트는 모노레포 내의 `packages/ui` 디렉토리에서 공유 UI 컴포넌트를 관리합니다. 모든 UI 컴포넌트는 [shadcn/ui](https://ui.shadcn.com/)를 기반으로 하며, 모든 애플리케이션(`apps/*`)에서 일관된 디자인 시스템을 제공하는 것을 목표로 합니다.
+
+### 새로운 컴포넌트 추가하기
+
+새로운 `shadcn/ui` 컴포넌트는 `packages/ui` 패키지에 추가해야 합니다.
+
+1.  `packages/ui` 디렉토리로 이동합니다.
+    ```bash
+    cd packages/ui
+    ```
+
+2.  `shadcn` CLI를 사용하여 원하는 컴포넌트를 추가합니다.
+    ```bash
+    # 예시: Button 컴포넌트 추가
+    pnpm dlx shadcn@latest add button
+    ```
+
+3.  추가된 컴포넌트를 다른 패키지에서 사용할 수 있도록 `packages/ui/src/index.ts` 파일에서 `export` 합니다.
+    ```ts
+    // packages/ui/src/index.ts
+    export * from './lib/utils';
+    export * from './components/ui/button'; // 새로 추가된 컴포넌트
+    // ... 다른 컴포넌트들
+    ```
+
+### 애플리케이션에서 컴포넌트 사용하기
+
+`apps/client`를 포함한 모든 애플리케이션에서는 `@travel-table-hq/ui` 패키지를 통해 공유 컴포넌트를 가져와 사용할 수 있습니다.
+
+```tsx
+// 예: apps/client/src/pages/MyPage.tsx
+
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@travel-table-hq/ui';
+
+function MyPage() {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome!</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p>This is a shared button from our UI package.</p>
+        <Button>Click Me</Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default MyPage;
+```
+
 ## 🔧 시작하기
 
 ### 필수 요구사항
