@@ -10,6 +10,9 @@
 - Vite 6.3.5
 - React Router DOM 7.6.1
 
+### 모노레포
+- pnpm Workspaces
+
 ### 개발 도구
 - ESLint
 - Prettier
@@ -18,17 +21,18 @@
 ## 📁 프로젝트 구조
 ```
 travel-table-hq-client/
-├── src/           # 소스 코드
-├── public/        # 정적 파일
-├── index.html     # 진입점
-└── vite.config.js # Vite 설정
+├── apps/
+│   └── client/       # 클라이언트 애플리케이션 (Vite + React)
+├── packages/         # 공유 라이브러리 (UI 컴포넌트, 유틸리티 등)
+├── pnpm-workspace.yaml
+└── package.json
 ```
 
 ## 🔧 시작하기
 
 ### 필수 요구사항
 - Node.js (최신 LTS 버전 권장)
-- npm (Node.js와 함께 설치됨)
+- pnpm ( `npm install -g pnpm` 으로 설치)
 
 ### 설치 방법
 
@@ -40,25 +44,25 @@ cd travel-table-hq-client
 
 2. 의존성 설치
 ```bash
-npm install
+pnpm install
 ```
 
-3. 개발 서버 실행
-```bash
-npm run dev
-```
+### 개발 서버 실행
 
-4. 빌드
+**클라이언트 앱 실행:**
 ```bash
-npm run build
+pnpm --filter travel-table-hq-client dev
+```
+또는, 루트 `package.json`에 정의된 스크립트를 사용할 수 있습니다:
+```bash
+pnpm dev
 ```
 
 ## 📝 사용 가능한 스크립트
 
-- `npm run dev`: 개발 서버 실행
-- `npm run build`: 프로덕션용 빌드
-- `npm run lint`: ESLint 실행
-- `npm run preview`: 빌드된 결과물 미리보기
+- `pnpm dev`: 클라이언트 개발 서버 실행
+- `pnpm build`: 클라이언트 프로덕션용 빌드
+- `pnpm lint`: 클라이언트 코드 린트 검사
 
 ## 🔍 코드 컨벤션
 
