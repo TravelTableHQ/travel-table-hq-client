@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: '@travel-table-hq/ui',
+      name: '@ui',
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
@@ -25,6 +25,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@ui": path.resolve(__dirname, "./src")
     },
   },
 }) 
