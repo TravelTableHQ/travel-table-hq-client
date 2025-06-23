@@ -5,7 +5,6 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import Pages from 'vite-plugin-pages'
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -33,8 +32,10 @@ export default defineConfig({
       ],
     },
   },
-  alias: {
-    '@': path.resolve(__dirname, './src'), // 클라이언트 src
-    '@tt/ui': path.resolve(__dirname, '../../packages/ui/src'), // UI 패키지
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'), // 클라이언트 src
+      '@tt/ui': path.resolve(__dirname, '../../packages/ui/src'), // UI 패키지
+    },
   },
 })
