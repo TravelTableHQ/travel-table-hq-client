@@ -12,21 +12,43 @@
 
 ### 모노레포
 - pnpm Workspaces
+- Turborepo
 
 ### 개발 도구
 - ESLint
 - Prettier
 - TypeScript
 
-## 📁 프로젝트 구조
+## 🏗️ 모노레포 구조 및 빌드/테스트 관리
+
+이 프로젝트는 **pnpm workspaces**와 **Turborepo**를 활용한 모노레포입니다.
+
+### 폴더 구조
+
 ```
 travel-table-hq-client/
 ├── apps/
-│   └── client/       # 클라이언트 애플리케이션 (Vite + React)
-├── packages/         # 공유 라이브러리 (UI 컴포넌트, 유틸리티 등)
-├── pnpm-workspace.yaml
-└── package.json
+│   └── client/         # 실제 서비스되는 프론트엔드 앱 (Vite + React)
+├── packages/
+│   └── ui/             # 공통 UI 컴포넌트 패키지 (shadcn/ui 기반)
+├── package.json        # 루트 패키지 관리 및 터보 스크립트
+├── turbo.json          # Turborepo 파이프라인 설정
+├── pnpm-workspace.yaml # 워크스페이스 패키지 정의
+└── ...
 ```
+
+### 패키지 관리 도구
+
+- **pnpm**: 워크스페이스 기반 멀티 패키지 관리
+- **Turborepo**: 빌드/테스트/린트 파이프라인 관리 및 캐싱
+
+### 빌드 및 테스트 관리
+
+- 모든 패키지(apps, packages)는 자체적으로 `build`, `dev`, `lint`, `test` 스크립트를 가질 수 있습니다.
+- 루트에서 `pnpm build`, `pnpm dev`, `pnpm lint`, `pnpm test` 등으로 전체 워크스페이스를 관리할 수 있습니다.
+- 터보 캐시 및 의존성 기반 실행으로 빠른 작업이 가능합니다.
+
+
 
 ## 🎨 UI 라이브러리 (`packages/ui`)
 
@@ -57,12 +79,12 @@ travel-table-hq-client/
 
 ### 애플리케이션에서 컴포넌트 사용하기
 
-`apps/client`를 포함한 모든 애플리케이션에서는 `@travel-table-hq/ui` 패키지를 통해 공유 컴포넌트를 가져와 사용할 수 있습니다.
+`apps/client`를 포함한 모든 애플리케이션에서는 `@tt/ui` 패키지를 통해 공유 컴포넌트를 가져와 사용할 수 있습니다.
 
 ```tsx
 // 예: apps/client/src/pages/MyPage.tsx
 
-import { Button, Card, CardHeader, CardTitle, CardContent } from '@travel-table-hq/ui';
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@tt/ui';
 
 function MyPage() {
   return (
@@ -91,7 +113,7 @@ export default MyPage;
 
 1. 저장소 클론
 ```bash
-git clone [저장소 URL]
+git clone [https://github.com/TravelTableHQ/travel-table-hq-client.git]
 cd travel-table-hq-client
 ```
 
@@ -103,10 +125,6 @@ pnpm install
 ### 개발 서버 실행
 
 **클라이언트 앱 실행:**
-```bash
-pnpm --filter travel-table-hq-client dev
-```
-또는, 루트 `package.json`에 정의된 스크립트를 사용할 수 있습니다:
 ```bash
 pnpm dev
 ```

@@ -12,7 +12,6 @@
   ],
   "scripts": {
     "build": "vite build",
-    "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "clean": "rm -rf dist"
   },
