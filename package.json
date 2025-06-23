@@ -12,5 +12,9 @@
   "devDependencies": {
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "pnpm exec eslint --fix",
+    "**/*.{md,json,css,scss}": "pnpm exec prettier --write"
   }
 }
