@@ -2,11 +2,15 @@
   "name": "travel-table-hq-workspace",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter travel-table-hq-client dev",
-    "build": "pnpm --filter travel-table-hq-client build",
-    "lint": "pnpm --filter travel-table-hq-client lint"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   }
 }
