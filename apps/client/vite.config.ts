@@ -1,6 +1,4 @@
-import tailwindcssPostcss from '@tailwindcss/postcss'
 import react from '@vitejs/plugin-react'
-import autoprefixer from 'autoprefixer'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
@@ -19,23 +17,18 @@ export default defineConfig({
       routeStyle: 'next', // 동적 라우트에 Next.js 스타일([bracket]) 적용
     }),
   ],
-  css: {
-    postcss: {
-      plugins: [
-        tailwindcssPostcss({
-          config: path.resolve(
-            __dirname,
-            '../../packages/ui/tailwind.config.js'
-          ),
-        }),
-        autoprefixer,
-      ],
-    },
-  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'), // 클라이언트 src
       '@tt/ui': path.resolve(__dirname, '../../packages/ui/src'), // UI 패키지
     },
+  },
+  server: {
+    port: 3000,
+    host: true,
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
   },
 })
